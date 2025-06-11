@@ -1,10 +1,63 @@
-import React, { useState } from 'react';
-
+import { useState, useEffect, useRef } from "react";
+import GreenChromideFish from '../assests/FishImages/GreenChromideFish.jpg';
+import BigheadGoby from '../assests/FishImages/BigheadGoby.jpg';
+import Milkfish from '../assests/FishImages/MilkFish.jpg';
+import IndoPacificTarpon from '../assests/FishImages/IndoPacificTarpon.jpg';
+import Hilsa from '../assests/FishImages/Hilsa.jpg';
+import ButterCatfish from '../assests/FishImages/ButterCatFish.jpg';
 // Main App component
 function Info() {
  const [activeTab, setActiveTab] = useState('fishTypes'); // State to manage active tab
+const fishCards =[
+  {
+    "name": "Green Chromide",
+    image: GreenChromideFish,
+    "habitat": "A brackish/freshwater cichlid native to Chilika Lake.",
+    "description": "Oval body with grey-green bars; commonly seen in schools.",
+    "diseases": "Prone to: Parasitic infestations, fin erosion"
+  },
+  {
+    "name": "Bighead Goby",
+    image: BigheadGoby,
+    "habitat": "Small goby fish found in both marine and freshwater zones.",
+    "description": "Has a large head and thrives in brackish environments.",
+    "diseases": "Prone to: Skin flukes, Ich"
+  },
+  {
+    "name": "Milkfish",
+    image: Milkfish,
+    "habitat": "Migratory brackish-water fish seen in Chilika post-restoration.",
+    "description": "Silvery streamlined body, locally called 'Seba khainga'.",
+    "diseases": "Prone to: Viral nervous necrosis, gill disease"
+  },
+  {
+    "name": "Indo-Pacific Tarpon",
+    image: IndoPacificTarpon,
+    "habitat": "Large migratory silver fish seen after mouth opening.",
+    "description": "Powerful jumper, known locally as 'Nahama'.",
+    "diseases": "Prone to: Fungal infections, gill parasites"
+  },
+  {
+    "name": "Hilsa",
+    image: Hilsa,
+    "habitat": "A migratory and iconic shad fish in Indian waters.",
+    "description": "Valued for taste; reappeared in lake after rejuvenation.",
+    "diseases": "Prone to: Gill rot, parasitic worms"
+  },
+  {
+    "name": "Butter Catfish",
+    image: ButterCatfish,
+    "habitat": "Common freshwater catfish with soft body and whiskers.",
+    "description": "Found in freshwater sectors of Chilika.",
+    "diseases": "Prone to: Ulcers, bacterial infections"
+  }
+];
 
-  // Data for the different sections
+ 
+
+
+
+
   const fishData = {
     fishTypes: [
       "Siamese fighting fish", "Jawless fish", "Queen angelfish",
@@ -117,6 +170,29 @@ function Info() {
                 </li>
               ))}
             </ul>
+{/* Additional Info Boxes */}
+<div className="mt-10">
+  <h3 className="text-2xl font-bold text-blue-700 mb-4 text-center">Featured Fish Profiles</h3>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {fishCards.map((fish, index) => (
+      <div key={index} className="bg-blue-50 rounded-lg shadow-md overflow-hidden transition hover:shadow-lg">
+        <div className="h-40 bg-gray-300 flex items-center justify-center text-gray-500 text-lg font-medium">
+          <img src={fish.image} alt={fish.name} className="object-cover w-full h-full" />
+        </div>
+        <div className="p-4">
+          <h4 className="text-xl font-semibold text-blue-800 mb-2">{fish.name}</h4>
+          <p className="text-gray-700 mb-1">{fish.habitat}</p>
+          <p className="text-gray-700 mb-2">{fish.description}</p>
+          <p className="text-sm italic text-red-600">Prone to: {fish.diseases}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+
           </div>
 
 

@@ -35,7 +35,10 @@ const navItems = [
   { name: 'ABOUT', to: '/about' },
   { name: 'INFO', to: '/info' },
   { name: 'GALLERY', to: '/gallery' },
-  { name: 'CONTACT', to: '/contact' }
+  { name: 'CONTACT', to: '/contact' },
+  { name: 'Training', to: '/training' },
+  { name: 'RESOURCES', to: '/resources' },
+  
 ];
 
 
