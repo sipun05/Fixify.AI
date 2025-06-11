@@ -6,6 +6,9 @@ import RuralDev from './components/RuralDev';
 import Home from './components/Home';
 import Login from './components/login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { motion } from "motion/react"
+import Gallery from './components/Gallery';
+import Info from './components/Info';
 function App() {
   return (
    
@@ -14,9 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-         <Route path="/login" element={<Login />} />
+        
+         <Route path="/gallery" element={<Gallery />} />
+         <Route path="/info" element={<Info />} />
          
-        <Route path="*" element={<div>404 Page Not Found</div>} />
+      
       </Routes>
     </BrowserRouter>
 

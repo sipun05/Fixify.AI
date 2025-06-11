@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, BookOpen } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import iithlogo from '../assests/iitlogo.jpg'; // Adjust the path as necessary
 import  { useEffect } from 'react';    
 
@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   const translations = [
-  "Mizuguna",        // English
+  "MizuGuna",        // English
   "मिज़ुगुना",       // Hindi
   "ミズグナ",         // Japanese
   "ମିଜୁଗୁନା",       // Odia
@@ -30,14 +30,14 @@ useEffect(() => {
 
   return () => clearInterval(interval);
 }, []);
+const navItems = [
+  { name: 'HOME', to: '/' },
+  { name: 'ABOUT', to: '/about' },
+  { name: 'INFO', to: '/info' },
+  { name: 'GALLERY', to: '/gallery' },
+  { name: 'CONTACT', to: '/contact' }
+];
 
-  const navItems = [
-    { name: 'HOME', href: '#home' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'INFO', href: '#info' },
-    { name: 'GALLERY', href: '#gallery' },
-    { name: 'CONTACT', href: '#contact' }
-  ];
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
@@ -62,13 +62,14 @@ useEffect(() => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200 text-sm tracking-wide"
-              >
-                {item.name}
-              </a>
+             <Link
+  key={item.name}
+  to={item.to}
+  className="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200 text-sm tracking-wide"
+>
+  {item.name}
+</Link>
+
             ))}
           </nav>
 
@@ -93,14 +94,15 @@ useEffect(() => {
           <div className="md:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col space-y-3">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-gray-700 hover:text-indigo-600 font-medium py-2 transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+               <Link
+  key={item.name}
+  to={item.to}
+  onClick={() => setIsMenuOpen(false)}
+  className="text-gray-700 hover:text-indigo-600 font-medium py-2 transition-colors duration-200"
+>
+  {item.name}
+</Link>
+
               ))}
               <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-200 mt-4 w-full">
                 Login
