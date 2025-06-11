@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Menu, X, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-
+import iithlogo from '../assests/iitlogo.jpg'; // Adjust the path as necessary
+import  { useEffect } from 'react';    
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +11,25 @@ const Header = () => {
     navigate('/login'); // Redirects to the login page
   };
 
+  const translations = [
+  "Mizuguna",        // English
+  "मिज़ुगुना",       // Hindi
+  "ミズグナ",         // Japanese
+  "ମିଜୁଗୁନା",       // Odia
+  "మిజుగునా",       // Telugu
+  "ಮಿಜುಗುನಾ",       // Kannada (optional)
+  "மிசுகுனா"         // Tamil (optional)
+];
+
+const [index, setIndex] = useState(0);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIndex((prevIndex) => (prevIndex + 1) % translations.length);
+  }, 1000); // 1000ms = 1 second
+
+  return () => clearInterval(interval);
+}, []);
 
   const navItems = [
     { name: 'HOME', href: '#home' },
@@ -26,17 +45,18 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <div className="text-orange-600 font-bold text-lg">MizuGuna</div>
-              <div className="text-xs text-gray-600 leading-tight">
-                <span className="block">वायबे हैंडरमासूं</span>
-                <span className="block">आई आई टी हैदराबाद</span>
-                <span className="block text-gray-500">IIT Hyderabad</span>
-              </div>
-            </div>
+            
+            <div className="flex flex-row items-center space-x-4">
+  <img src={iithlogo} alt="IIT Logo" className="w-28 h-20 inline-block" />
+  
+   <div className="flex flex-col leading-tight">
+    <span className="text-sm text-gray-700">వైద్య హైదరాబాదు</span>
+    <span className="text-sm text-gray-700">आई आई टी हैदराबाद</span>
+    <span className="text-sm font-semibold text-blue-800">IIT Hyderabad</span>
+  </div>
+    <span className="text-orange-500 text-2xl mx-10 font-bold">{translations[index]}</span>
+  
+</div>
           </div>
 
           {/* Desktop Navigation */}
