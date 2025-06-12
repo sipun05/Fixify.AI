@@ -10,6 +10,7 @@ import { motion } from "motion/react"
 import Gallery from './components/Gallery';
 import Info from './components/Info';
 import { ClerkProvider } from '@clerk/clerk-react';
+import TrainingPage from './components/TrainingPage';
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
@@ -25,9 +26,8 @@ function App() {
 
          <Route path="/gallery" element={<Gallery />} />
          <Route path="/info" element={<Info />} />
-         
-      
-      </Routes>
+         <Route path="/training" element={<TrainingPage />}/>
+       </Routes>
     </BrowserRouter>
   </ClerkProvider>
   );

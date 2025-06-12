@@ -5,51 +5,51 @@ import Milkfish from '../assests/FishImages/MilkFish.jpg';
 import IndoPacificTarpon from '../assests/FishImages/IndoPacificTarpon.jpg';
 import Hilsa from '../assests/FishImages/Hilsa.jpg';
 import ButterCatfish from '../assests/FishImages/ButterCatFish.jpg';
-// Main App component
+
 function Info() {
- const [activeTab, setActiveTab] = useState('fishTypes'); // State to manage active tab
+ const [activeTab, setActiveTab] = useState('fishTypes'); 
 const fishCards =[
   {
     "name": "Green Chromide",
     image: GreenChromideFish,
-    "habitat": "A brackish/freshwater cichlid native to Chilika Lake.",
+    "habitat": "A brackish/freshwater cichlid native to many lakes.",
     "description": "Oval body with grey-green bars; commonly seen in schools.",
-    "diseases": "Prone to: Parasitic infestations, fin erosion"
+    "diseases": " Parasitic infestations, fin erosion"
   },
   {
     "name": "Bighead Goby",
     image: BigheadGoby,
     "habitat": "Small goby fish found in both marine and freshwater zones.",
     "description": "Has a large head and thrives in brackish environments.",
-    "diseases": "Prone to: Skin flukes, Ich"
+    "diseases": " Skin flukes, Ich"
   },
   {
     "name": "Milkfish",
     image: Milkfish,
-    "habitat": "Migratory brackish-water fish seen in Chilika post-restoration.",
+    "habitat": "Migratory brackish-water fish .",
     "description": "Silvery streamlined body, locally called 'Seba khainga'.",
-    "diseases": "Prone to: Viral nervous necrosis, gill disease"
+    "diseases": " Viral nervous necrosis, gill disease"
   },
   {
     "name": "Indo-Pacific Tarpon",
     image: IndoPacificTarpon,
     "habitat": "Large migratory silver fish seen after mouth opening.",
     "description": "Powerful jumper, known locally as 'Nahama'.",
-    "diseases": "Prone to: Fungal infections, gill parasites"
+    "diseases": " Fungal infections, gill parasites"
   },
   {
     "name": "Hilsa",
     image: Hilsa,
     "habitat": "A migratory and iconic shad fish in Indian waters.",
     "description": "Valued for taste; reappeared in lake after rejuvenation.",
-    "diseases": "Prone to: Gill rot, parasitic worms"
+    "diseases": " Gill rot, parasitic worms"
   },
   {
     "name": "Butter Catfish",
     image: ButterCatfish,
     "habitat": "Common freshwater catfish with soft body and whiskers.",
-    "description": "Found in freshwater sectors of Chilika.",
-    "diseases": "Prone to: Ulcers, bacterial infections"
+    "description": "Found in freshwater sectors.",
+    "diseases": " Ulcers, bacterial infections"
   }
 ];
 
