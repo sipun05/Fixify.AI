@@ -1,21 +1,21 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react';
 
-
+// Assuming these images are correctly path-ed in your project
 import deviceOverviewImage from '../assests/FieldWork/Device1.jpg';
 import fishermanLaunchingImage from '../assests/FieldWork/FILED6.jpg';
 import fishermanMappingImage from '../assests/FieldWork/FILED7.jpg';
 import fishermanUsingControllerImage from '../assests/FieldWork/FIELD2.jpg';
 
-// Reusable Modal Component
+// Reusable Modal Component (no changes needed here, it's functional)
 const ImageModal = ({ imageUrl, altText, onClose }) => {
-  if (!imageUrl) return null; // Don't render if no image URL
+  if (!imageUrl) return null;
 
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
-      onClick={onClose} // Close when clicking outside the image
+      onClick={onClose}
     >
-      <div className="relative" onClick={(e) => e.stopPropagation()}> {/* Prevent modal from closing when clicking image */}
+      <div className="relative" onClick={(e) => e.stopPropagation()}>
         <img
           src={imageUrl}
           alt={altText}
@@ -35,7 +35,7 @@ const ImageModal = ({ imageUrl, altText, onClose }) => {
 
 
 const TrainingPage = () => {
-  const [modalImage, setModalImage] = useState(null); // State to hold the image URL for the modal
+  const [modalImage, setModalImage] = useState(null);
 
   const openModal = (imageUrl) => {
     setModalImage(imageUrl);
@@ -46,15 +46,18 @@ const TrainingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    // Adjusted background gradient to match the image
+    <div className="min-h-screen bg-gradient-to-br from-[#8A2BE2] via-[#6A5ACD] to-[#483D8B] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-blue-800 pt-10 pb-6 leading-tight">
+        {/* Main Title - Color adjusted to darker blue/purple for contrast */}
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#483D8B] pt-10 pb-6 leading-tight text-center">
           Training for Fishermen
         </h1>
 
-
+        {/* Section 1 */}
         <section className="p-6 sm:p-8 mb-8 mx-6 bg-gray-50 rounded-lg shadow-inner">
-          <h2 className="text-3xl font-bold text-blue-700 mb-6 pb-2 border-b-2 border-blue-200">
+          {/* Subtitle - Color adjusted to match the blue in the image */}
+          <h2 className="text-3xl font-bold text-[#4169E1] mb-6 pb-2 border-b-2 border-[#A7C7E7]">
             1. Understanding Your MizuGuna Sensor Device
           </h2>
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -74,16 +77,17 @@ const TrainingPage = () => {
                 src={deviceOverviewImage}
                 alt="MizuGuna Sensor Device Components Overview"
                 className="w-full h-auto rounded-lg shadow-md border border-gray-200 cursor-pointer transition-transform duration-200 hover:scale-105"
-                onClick={() => openModal(deviceOverviewImage)} // Add onClick handler
+                onClick={() => openModal(deviceOverviewImage)}
               />
               <p className="text-sm text-gray-600 mt-2 text-center">A detailed look at the MizuGuna sensor node and its components.</p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Handling the Device Safely - Emphasize fisherman's interaction */}
+        {/* Section 2 */}
         <section className="p-6 sm:p-8 mb-8 mx-6 bg-blue-50 rounded-lg shadow-inner">
-          <h2 className="text-3xl font-bold text-blue-700 mb-6 pb-2 border-b-2 border-blue-200">
+          {/* Subtitle - Color adjusted to match the blue in the image */}
+          <h2 className="text-3xl font-bold text-[#4169E1] mb-6 pb-2 border-b-2 border-[#A7C7E7]">
             2. Safe Handling and Launching Procedures
           </h2>
           <div className="flex flex-col md:flex-row-reverse items-center md:items-start gap-8">
@@ -105,16 +109,17 @@ const TrainingPage = () => {
                 src={fishermanLaunchingImage}
                 alt="Fisherman gently launching MizuGuna device"
                 className="w-full h-auto rounded-lg shadow-md border border-gray-200 cursor-pointer transition-transform duration-200 hover:scale-105"
-                onClick={() => openModal(fishermanLaunchingImage)} // Add onClick handler
+                onClick={() => openModal(fishermanLaunchingImage)}
               />
               <p className="text-sm text-gray-600 mt-2 text-center">Collaboration with Our team, alongside the local community of Fishermen for the Testing of the Device.</p>
             </div>
           </div>
         </section>
 
-        {/* Section 3: Mapping the Lake for Comprehensive Data - Emphasize fisherman guiding */}
+        {/* Section 3 */}
         <section className="p-6 sm:p-8 mb-8 mx-6 bg-gray-50 rounded-lg shadow-inner">
-          <h2 className="text-3xl font-bold text-blue-700 mb-6 pb-2 border-b-2 border-blue-200">
+          {/* Subtitle - Color adjusted to match the blue in the image */}
+          <h2 className="text-3xl font-bold text-[#4169E1] mb-6 pb-2 border-b-2 border-[#A7C7E7]">
             3. Mapping Your Lake for Comprehensive Data
           </h2>
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -137,16 +142,17 @@ const TrainingPage = () => {
                 src={fishermanMappingImage}
                 alt="Fisherman guiding device for lake mapping"
                 className="w-full h-auto rounded-lg shadow-md border border-gray-200 cursor-pointer transition-transform duration-200 hover:scale-105"
-                onClick={() => openModal(fishermanMappingImage)} // Add onClick handler
+                onClick={() => openModal(fishermanMappingImage)}
               />
               <p className="text-sm text-gray-600 mt-2 text-center">Instructions given to the fisherman for effective mapping.</p>
             </div>
           </div>
         </section>
 
-        {/* Section 4: Controlling the Sensor Node - Emphasize fisherman using controller */}
+        {/* Section 4 */}
         <section className="p-6 sm:p-8 mb-8 mx-6 bg-blue-50 rounded-lg shadow-inner">
-          <h2 className="text-3xl font-bold text-blue-700 mb-6 pb-2 border-b-2 border-blue-200">
+          {/* Subtitle - Color adjusted to match the blue in the image */}
+          <h2 className="text-3xl font-bold text-[#4169E1] mb-6 pb-2 border-b-2 border-[#A7C7E7]">
             4. Basic Control of the Sensor Node
           </h2>
           <div className="flex flex-col md:flex-row-reverse items-center md:items-start gap-8">
@@ -168,13 +174,14 @@ const TrainingPage = () => {
                 src={fishermanUsingControllerImage}
                 alt="Fisherman using MizuGuna controller"
                 className="w-full h-auto rounded-lg shadow-md border border-gray-200 cursor-pointer transition-transform duration-200 hover:scale-105"
-                onClick={() => openModal(fishermanUsingControllerImage)} // Add onClick handler
+                onClick={() => openModal(fishermanUsingControllerImage)}
               />
               <p className="text-sm text-gray-600 mt-2 text-center">A fisherman demonstrating the use of the MizuGuna controller.</p>
             </div>
           </div>
         </section>
 
+        {/* Important Reminders & Support Section */}
         <section className="bg-green-50 border-l-4 border-green-500 p-6 sm:p-8 mx-6 rounded-lg shadow-md mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-green-700 mb-4 pb-2 border-b-2 border-green-200">
             Important Reminders & Support
@@ -193,7 +200,7 @@ const TrainingPage = () => {
       {/* Render the ImageModal if modalImage is set */}
       <ImageModal
         imageUrl={modalImage}
-        altText="Zoomed image" // You can pass specific alt text if needed
+        altText="Zoomed image"
         onClose={closeModal}
       />
     </div>
