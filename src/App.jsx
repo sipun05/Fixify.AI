@@ -7,7 +7,7 @@ import Hero from './components/Hero'; // (Not used in routes, consider if needed
 import Features from './components/Features'; // (Not used in routes, consider if needed elsewhere)
 import RuralDev from './components/RuralDev'; // (Not used in routes, consider if needed elsewhere)
 import Home from './components/Home';
-import Login from './components/login';
+import Login from './components/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from "framer-motion"; // Corrected import for motion
 import Gallery from './components/Gallery';
