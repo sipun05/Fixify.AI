@@ -3,6 +3,7 @@ import { Menu, X, BookOpen } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import iithlogo from '../assests/iitlogo.jpg'; // Adjust the path as necessary
 import { useEffect } from 'react';
+import IITH_symbol from '../assests/IITH_symbol.png' // Adjust the path as necessary
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,7 +57,7 @@ const Header = () => {
                     {/* Logo */}
                     <div className="flex items-center space-x-3">
                         <div className="flex flex-row items-center space-x-4">
-                            <img src={iithlogo} alt="IIT Logo" className="w-28 h-20 inline-block" />
+                            <img src={IITH_symbol} alt="IIT Logo" className="max-w-16 max-h-16 inline-block" />
 
                             <div className="flex flex-col leading-tight">
                                 <span className="text-sm text-gray-700">వైద్య హైదరాబాదు</span>

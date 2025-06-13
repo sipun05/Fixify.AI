@@ -6,7 +6,7 @@ import RuralDev from './RuralDev'
 function Home() {
   return (
    <>
-   <Header />
+ 
    <Hero />
    <RuralDev />
    
