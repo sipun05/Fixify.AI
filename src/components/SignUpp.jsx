@@ -74,8 +74,8 @@ const SignUpPage = ({ setIsAuthenticated }) => {
      
         if (isValid) {
             try {
-                
-                const response = await fetch('https://st-dumb-broke-room.trycloudflare.com/api/signup', {
+
+                const response = await fetch('https://caps-weights-col-sara.trycloudflare.com/api/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

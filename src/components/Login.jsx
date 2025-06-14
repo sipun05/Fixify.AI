@@ -62,7 +62,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
         if (isValid) {
             try {
                 // IMPORTANT: Replace with a secure backend API endpoint for production
-                const response = await fetch('https://st-dumb-broke-room.trycloudflare.com/api/login', {
+                const response = await fetch('https://caps-weights-col-sara.trycloudflare.com/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
