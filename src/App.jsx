@@ -7,7 +7,7 @@ import Hero from './components/Hero'; // (Not used in routes, consider if needed
 import Features from './components/Features'; // (Not used in routes, consider if needed elsewhere)
 import RuralDev from './components/RuralDev'; // (Not used in routes, consider if needed elsewhere)
 import Home from './components/Home';
-import Login from './components/Login';
+import Login from './components/login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from "framer-motion"; // Corrected import for motion
 import Gallery from './components/Gallery';
@@ -18,6 +18,7 @@ import DashboardTable from './components/DashboardTable';
 import Graph from './components/Graph';
 import SignInNew from './components/SignInNew';
 import SignUpp from './components/SignUpp';
+import About from './components/About';
 
 
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/graph" element={<Graph />} />
           <Route path="/signnew" element={<SignInNew />} />
           <Route  path='signupp' element={<SignUpp/>}/>
+          <Route path='/about' element={<About />} />
           {/* Add routes for other pages like About, Contact, Resources if you have them */}
           {/* Example: */}
           {/* <Route path="/about" element={<About />} /> */}
