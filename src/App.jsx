@@ -7,7 +7,7 @@ import Hero from './components/Hero'; // (Not used in routes, consider if needed
 import Features from './components/Features'; // (Not used in routes, consider if needed elsewhere)
 import RuralDev from './components/RuralDev'; // (Not used in routes, consider if needed elsewhere)
 import Home from './components/Home';
-import Login from './components/login';
+import UserLogin from './components/UserLogin';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion } from "framer-motion"; // Corrected import for motion
 import Gallery from './components/Gallery';
@@ -37,7 +37,7 @@ function App() {
         <Header /> 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/login" element={<UserLogin setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/info" element={<Info />} />
           <Route path="/training" element={<TrainingPage />} />
@@ -52,6 +52,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/resources' element={<Resources/>} />
           <Route  path ='/contact' element={<Contact/>}/>
+          <Route path ='/userlogin' element ={<UserLogin/>}/>
           {/* Add routes for other pages like About, Contact, Resources if you have them */}
           {/* Example: */}
           {/* <Route path="/about" element={<About />} /> */}

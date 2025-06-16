@@ -11,7 +11,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const handleLoginClick = () => {
-        navigate('/login'); // Redirects to the login page
+        navigate('/userlogin'); // Redirects to the login page
     };
 
     const translations = [
