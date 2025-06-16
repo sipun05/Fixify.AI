@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate and Link
+import { useNavigate, Link } from 'react-router-dom';
 
-const LoginPage = ({ setIsAuthenticated }) => {
-    // State variables for username, password, and form validation errors
+const Login = ({ setIsAuthenticated }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    // State for the custom message modal
+    
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
 
-    // Initialize useNavigate hook for programmatic navigation
     const navigate = useNavigate();
 
     /**
@@ -82,7 +80,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
 
            
                 } else {
-                    // Login failed (e.g., incorrect credentials, user not found)
+                   
                     const message = data.message || 'Login failed. Please check your credentials or sign up.';
                     setModalMessage(message);
                     setIsSuccess(false);
@@ -207,4 +205,4 @@ const LoginPage = ({ setIsAuthenticated }) => {
     );
 };
 
-export default LoginPage;
+export default Login;
