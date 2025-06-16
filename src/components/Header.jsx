@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Menu, X, BookOpen } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import iithlogo from '../assests/iitlogo.jpg'; // Adjust the path as necessary
+import iithlogo from '../assests/iitlogo.jpg';
 import { useEffect } from 'react';
-import IITH_symbol from '../assests/IITH_symbol.png' // Adjust the path as necessary
+import IITH_symbol from '../assests/IITH_symbol.png' 
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,13 +15,13 @@ const Header = () => {
     };
 
     const translations = [
-        "MizuGuna",        // English
-        "मिज़ुगुना",       // Hindi
-        "ミズグナ",         // Japanese
-        "ମିଜୁଗୁନା",       // Odia
-        "మిజుగునా",       // Telugu
-        "ಮಿಜುಗುನಾ",       // Kannada (optional)
-        "மிசுகுனா"         // Tamil (optional)
+        "MizuGuna",        
+        "मिज़ुगुना",       
+        "ミズグナ",         
+        "ମିଜୁଗୁନା",       
+        "మిజుగునా",       
+        "ಮಿಜುಗುನಾ",      
+        "மிசுகுனா"         
     ];
 
     const [index, setIndex] = useState(0);
@@ -46,7 +46,7 @@ const Header = () => {
             ]
         },
         { name: 'GALLERY', to: '/gallery' },
-        { name: 'CONTACT', to: '/signnew' },
+        { name: 'CONTACT', to: '/contact' },
         { name: 'RESOURCES', to: '/resources' },
     ];
 
@@ -59,11 +59,10 @@ const Header = () => {
                         <div className="flex flex-row items-center space-x-4">
                             <img src={IITH_symbol} alt="IIT Logo" className="max-w-16 max-h-16 inline-block" />
 
-                            <div className="flex flex-col leading-tight">
-                                <span className="text-sm text-gray-700">వైద్య హైదరాబాదు</span>
-                                <span className="text-sm text-gray-700">आई आई टी हैदराबाद</span>
-                                <span className="text-sm font-semibold text-blue-800">IIT Hyderabad</span>
-                            </div>
+                           <div className="flex flex-col leading-tight">
+  <span className="text-2xl font-semibold text-blue-800">IIT Hyderabad</span>
+</div>
+
                             <span className="text-orange-500 text-2xl mx-10 font-bold">{translations[index]}</span>
                         </div>
                     </div>

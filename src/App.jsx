@@ -17,8 +17,11 @@ import TrainingPage from './components/TrainingPage';
 import DashboardTable from './components/DashboardTable';
 import Graph from './components/Graph';
 import SignInNew from './components/SignInNew';
+import Contact from './components/Contact';
 import SignUpp from './components/SignUpp';
 import About from './components/About';
+
+import Resources from './components/Resources';
 
 
 
@@ -38,6 +41,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/info" element={<Info />} />
           <Route path="/training" element={<TrainingPage />} />
+          <Route path="/contact" element={<Contact />} />
          <Route
   path="/dashboard"
   element={isAuthenticated ? <DashboardTable /> : <Navigate to="/login" />}
@@ -46,6 +50,8 @@ function App() {
           <Route path="/signnew" element={<SignInNew />} />
           <Route  path='signupp' element={<SignUpp/>}/>
           <Route path='/about' element={<About />} />
+          <Route path='/resources' element={<Resources/>} />
+          <Route  path ='/contact' element={<Contact/>}/>
           {/* Add routes for other pages like About, Contact, Resources if you have them */}
           {/* Example: */}
           {/* <Route path="/about" element={<About />} /> */}
