@@ -28,8 +28,8 @@ function DashboardTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch("https://caps-weights-col-sara.trycloudflare.com/api/dashboard", {
+      try {d
+        const res = await fetch("https://api.mizuguna.in/api/dashboard", {
           method: "get",
           headers: new Headers({
             "ngrok-skip-browser-warning": "69420",

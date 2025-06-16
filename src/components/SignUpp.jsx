@@ -75,7 +75,7 @@ const SignUpPage = ({ setIsAuthenticated }) => {
         if (isValid) {
             try {
 
-                const response = await fetch('https://caps-weights-col-sara.trycloudflare.com/api/signup', {
+                const response = await fetch('https://api.mizuguna.in/api/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
