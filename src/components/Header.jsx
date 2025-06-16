@@ -13,6 +13,11 @@ const Header = () => {
         navigate('/userlogin');
     };
 
+
+     const onClickLogo = () => {
+navigate('/')
+ }
+
     const translations = [
         "MizuGuna",
         "మిజగునా",
@@ -56,9 +61,9 @@ const Header = () => {
                     {/* Logo and Dynamic Text */}
                     <div className="flex items-center space-x-3">
                         <div className="flex flex-row items-center space-x-4">
-                            <img src={IITH_symbol} alt="IIT Logo" className="max-w-16 max-h-16 inline-block" />
+                            <img onClick={onClickLogo} src={IITH_symbol} alt="IIT Logo" className="max-w-16 max-h-16 inline-block" />
                             <div className="flex flex-col leading-tight">
-                                <span className="text-2xl font-semibold text-blue-800">IIT Hyderabad</span>
+                                <span onClick={onClickLogo} className="text-2xl font-semibold text-blue-800">IIT Hyderabad</span>
                             </div>
                             {/* Fixed width container for translations */}
                             <div className="w-40 text-center"> {/* Adjust w-40 as needed to fit the longest translation */}

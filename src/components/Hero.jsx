@@ -1,11 +1,16 @@
-import React from 'react';
-
+import React, { use } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Hero = () => {
+  const navigate = useNavigate();
+ const onClickGetStarted = () => {
+navigate('/about')
+ }
+
   return (
     <section className="relative min-h-[80vh] overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-emerald-500">
-        {/* Animated Background Shapes */}         v vvbvb
+        {/* Animated Background Shapes */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-400 rounded-full opacity-15 animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-400 rounded-full opacity-10 animate-pulse delay-500"></div>
@@ -39,7 +44,7 @@ const Hero = () => {
                 <button className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                   Learn More
                 </button>
-                <button className="bg-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                <button onClick={onClickGetStarted} className="bg-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                   Get Started
                 </button>
               </div>
