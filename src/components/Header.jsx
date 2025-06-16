@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
-import { Menu, X, BookOpen } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import iithlogo from '../assests/iitlogo.jpg';
 import { useEffect } from 'react';
-import IITH_symbol from '../assests/IITH_symbol.png' 
+import { Menu, X } from 'lucide-react'; // BookOpen is not used, so it can be removed
+import { Link, useNavigate } from 'react-router-dom';
+import IITH_symbol from '../assests/IITH_symbol.png'; // iithlogo is not used, so it can be removed
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isInfoSubMenuOpen, setIsInfoSubMenuOpen] = useState(false); // New state for INFO submenu
+    const [isInfoSubMenuOpen, setIsInfoSubMenuOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLoginClick = () => {
-        navigate('/userlogin'); // Redirects to the login page
+        navigate('/userlogin');
     };
 
     const translations = [
-        "MizuGuna",        
-        "मिज़ुगुना",       
-        "ミズグナ",         
-        "ମିଜୁଗୁନା",       
-        "మిజుగునా",       
-        "ಮಿಜುಗುನಾ",      
-        "மிசுகுனா"         
+        "MizuGuna",
+        "మిజగునా",
+        "ミズグナ",
+        "ମିଜୁଗୁନା",
+        "మిజుగునా",
+        "ಮಿಜುಗುನಾ",
+        "மிசுகுனா"
     ];
 
     const [index, setIndex] = useState(0);
@@ -29,7 +28,7 @@ const Header = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex((prevIndex) => (prevIndex + 1) % translations.length);
-        }, 1000); // 1000ms = 1 second
+        }, 1000);
 
         return () => clearInterval(interval);
     }, []);
@@ -39,9 +38,9 @@ const Header = () => {
         { name: 'ABOUT', to: '/about' },
         {
             name: 'INFO',
-            to: '#', // Keep '#' as it will be handled by onClick
+            to: '#',
             submenu: [
-                { name: 'Fish Farming', to: '/info' }, // More specific paths
+                { name: 'Fish Farming', to: '/info' },
                 { name: 'Training', to: '/training' }
             ]
         },
@@ -54,23 +53,24 @@ const Header = () => {
         <header className="bg-white shadow-sm border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center py-4">
-                    {/* Logo */}
+                    {/* Logo and Dynamic Text */}
                     <div className="flex items-center space-x-3">
                         <div className="flex flex-row items-center space-x-4">
                             <img src={IITH_symbol} alt="IIT Logo" className="max-w-16 max-h-16 inline-block" />
-
-                           <div className="flex flex-col leading-tight">
-  <span className="text-2xl font-semibold text-blue-800">IIT Hyderabad</span>
-</div>
-
-                            <span className="text-orange-500 text-2xl mx-10 font-bold">{translations[index]}</span>
+                            <div className="flex flex-col leading-tight">
+                                <span className="text-2xl font-semibold text-blue-800">IIT Hyderabad</span>
+                            </div>
+                            {/* Fixed width container for translations */}
+                            <div className="w-40 text-center"> {/* Adjust w-40 as needed to fit the longest translation */}
+                                <span className="text-orange-500 text-2xl font-bold block">{translations[index]}</span>
+                            </div>
                         </div>
                     </div>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-8">
                         {navItems.map((item) => (
-                            <div key={item.name} className="relative"> {/* Added relative positioning for submenu */}
+                            <div key={item.name} className="relative">
                                 {item.submenu ? (
                                     <>
                                         <button
@@ -80,12 +80,12 @@ const Header = () => {
                                             {item.name}
                                         </button>
                                         {isInfoSubMenuOpen && (
-                                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"> {/* Submenu styling */}
+                                            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
                                                 {item.submenu.map((subItem) => (
                                                     <Link
                                                         key={subItem.name}
                                                         to={subItem.to}
-                                                        onClick={() => setIsInfoSubMenuOpen(false)} // Close submenu on click
+                                                        onClick={() => setIsInfoSubMenuOpen(false)}
                                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                                     >
                                                         {subItem.name}
@@ -137,7 +137,7 @@ const Header = () => {
                                                 {item.name}
                                             </button>
                                             {isInfoSubMenuOpen && (
-                                                <div className="pl-4 flex flex-col"> {/* Indent submenu items */}
+                                                <div className="pl-4 flex flex-col">
                                                     {item.submenu.map((subItem) => (
                                                         <Link
                                                             key={subItem.name}

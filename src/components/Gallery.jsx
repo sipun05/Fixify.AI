@@ -6,7 +6,7 @@ import field4 from "../assests/FieldWork/FIELD4.jpg";
 import field5 from "../assests/FieldWork/FILED5.jpg";
 import field6 from "../assests/FieldWork/FILED6.jpg";
 import field7 from "../assests/FieldWork/FILED7.jpg";
-
+import Building2 from "../assests/FieldWork/Building_Image2.jpg"; // Background image for the carousels
 // Device images
 import device1 from "../assests/FieldWork/Device1.jpg";
 import device2 from "../assests/FieldWork/Device2.jpg";
@@ -71,7 +71,6 @@ const ImageCarousel = ({ images, currentIndex, setCurrentIndex, title, openLight
     </div>
   );
 };
-
 
 export default function Gallery() {
   // State for the auto-sliding carousels
@@ -161,7 +160,6 @@ export default function Gallery() {
     deviceSlideIntervalRef.current = setInterval(goToNextDeviceSlide, 3000);
   };
 
-
   // --- Effects ---
   useEffect(() => {
     startFieldAutoSlide();
@@ -184,15 +182,15 @@ export default function Gallery() {
   }, [selectedImg, lightboxCurrentIndex, lightboxImages]);
 
   return (
-    // Outer container with the updated gradient background
+    // Outer container with the Building2 background image
     <div
-      className="min-h-screen pt-24 pb-8 flex flex-col items-center
-                 bg-gradient-to-r from-[#8A2BE2] to-[#483D8B]" // Gradient: Blue Violet to Dark Slate Blue
+      className="min-h-screen pt-24 pb-8 flex flex-col items-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${Building2})` }}
     >
       {/* Container for the main title card */}
       <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-2xl w-11/12 text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-         Gallery
+          Gallery
         </h1>
       </div>
 
