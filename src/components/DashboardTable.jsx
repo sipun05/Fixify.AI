@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import DataGraph from "../components/Graph"; // Assuming this path is correct
+import DataGraph from "../components/Graph";
+import Cookies from "js-cookie";
 
 function formatDate(isoString) {
   const date = new Date(isoString);
@@ -8,9 +9,10 @@ function formatDate(isoString) {
 
 function DashboardTable() {
   const [data, setData] = useState([]);
-  const token = localStorage.getItem("authToken");    
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const token = Cookies.get("token") || "default-token";
 
-  // State to manage visibility of each parameter
   const [visibleParameters, setVisibleParameters] = useState({
     temperature: true,
     ph: true,
@@ -18,7 +20,6 @@ function DashboardTable() {
     orp: true,
   });
 
-  // Array of all available parameters, including a display name
   const allParameters = [
     { key: "temperature", name: "Temperature" },
     { key: "ph", name: "pH" },
@@ -26,41 +27,51 @@ function DashboardTable() {
     { key: "orp", name: "ORP" },
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("https://api.mizuguna.in/api/dashboard", {
-          method: "get",
-          headers: new Headers({
-            "ngrok-skip-browser-warning": "69420",
-            Authorization: `Bearer ${token}`,
-          }),
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
-        setData(data);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        // Handle error, e.g., display an error message to the user
+  const fetchData = async () => {
+    try {
+      const endpoint =
+        startTime && endTime
+          ? `https://api.mizuguna.in/api/betweenData?start=${startTime}&end=${endTime}`
+          : "https://api.mizuguna.in/api/dashboard";
+
+      const res = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-    };
 
+      const result = await res.json();
+      setData(result);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 5000);
+  //   return () => clearInterval(interval);
+  // }, [token]);
+
+  useEffect(() => {
+    // Only fetch once on initial load
     fetchData();
-    const interval = setInterval(fetchData, 5000);
-    return () => clearInterval(interval);
-  }, [token]); // Added token to dependency array as it's used inside useEffect
+  }, []);
 
-  // Handler for checkbox changes
+
   const handleCheckboxChange = (paramKey) => {
     setVisibleParameters((prev) => ({
       ...prev,
-      [paramKey]: !prev[paramKey], // Toggle the visibility
+      [paramKey]: !prev[paramKey],
     }));
   };
 
-  // Filter the data to pass to the graph based on visible parameters
   const filteredGraphData = data.map((row) => {
     const newRow = { dateTime: row.dateTime };
     for (const param of allParameters) {
@@ -74,15 +85,60 @@ function DashboardTable() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#8a2be2] via-[#a855f7] to-[#d8b4fe] py-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
       <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 lg:p-16 max-w-6xl mx-auto my-8">
-        <h2 className="mb-16 text-center text-5xl font-extrabold text-gray-800 tracking-tight leading-tight">
+        {/* <h2 className="mb-16 text-center text-5xl font-extrabold text-gray-800 tracking-tight leading-tight">
           IoT infrastructure for inland fresh water fish farming
-        </h2>
+        </h2> */}
 
         <h3 className="mb-8 text-center text-4xl font-bold text-gray-700">
           Sensor Data Dashboard
         </h3>
 
-        {/* Checkbox controls for parameter visibility */}
+        {/* Time Range Filter */}
+        {/* Time Range Filter with Buttons */}
+        <div className="flex flex-wrap justify-center items-center gap-6 mb-8 bg-gray-50 p-4 rounded-lg shadow-sm">
+          <div className="flex flex-col">
+            <label className="text-gray-700 font-medium mb-1">Start Time:</label>
+            <input
+              type="datetime-local"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+              className="border rounded px-3 py-2"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-gray-700 font-medium mb-1">End Time:</label>
+            <input
+              type="datetime-local"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
+              className="border rounded px-3 py-2"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2 mt-6">
+            <button
+              onClick={fetchData}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded font-semibold shadow"
+            >
+              Fetch
+            </button>
+
+            <button
+              onClick={() => {
+                setStartTime("");
+                setEndTime("");
+                setData([]); // optional: clears stale filtered data
+                fetchData(); // will default to /api/dashboard
+              }}
+              className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded font-semibold shadow"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+
+        {/* Parameter Checkbox Filter */}
         <div className="mb-8 flex flex-wrap justify-center gap-6 p-4 bg-gray-50 rounded-lg shadow-sm">
           <span className="text-gray-700 font-semibold text-lg mr-4">Show/Hide Parameters:</span>
           {allParameters.map((param) => (
@@ -101,6 +157,7 @@ function DashboardTable() {
           ))}
         </div>
 
+        {/* Data Table */}
         <div className="max-h-96 overflow-y-auto border border-gray-300 rounded-lg shadow-md mb-8">
           <table className="w-full border-collapse min-w-full">
             <thead className="sticky top-0 bg-gray-100 z-10 shadow-sm">
@@ -131,9 +188,8 @@ function DashboardTable() {
                 data.map((row, idx) => (
                   <tr
                     key={idx}
-                    className={`${
-                      idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    } hover:bg-gray-100 transition duration-150 ease-in-out`}
+                    className={`${idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      } hover:bg-gray-100 transition duration-150 ease-in-out`}
                   >
                     <td className="py-3 px-4 border-b border-gray-100 whitespace-nowrap">
                       {formatDate(row.dateTime)}

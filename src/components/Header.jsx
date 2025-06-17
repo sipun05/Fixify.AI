@@ -14,7 +14,7 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   };
 
   const handleLogoutClick = () => {
-    Cookies.remove("authToken");
+    Cookies.remove("token");
     setIsAuthenticated(false);
     navigate('/userlogin');
   };
