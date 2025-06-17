@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Cookies from "js-cookie";
 
 const UserLogin = ({ setIsAuthenticated }) => {
     const [username, setUsername] = useState('');
@@ -69,7 +70,10 @@ const UserLogin = ({ setIsAuthenticated }) => {
                     setShowModal(true);
                     console.log('Login successful:', data);
                     console.log('Token:', data.token);
-                    localStorage.setItem("authToken", data.token);
+
+                    // ✅ Store token in cookie
+                    Cookies.set("token", data.token, { expires: 1 });
+
                 } else {
                     const message = data.message || 'Login failed. Please check your credentials or sign up.';
                     setModalMessage(message);
