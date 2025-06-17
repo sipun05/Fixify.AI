@@ -72,7 +72,7 @@ function Resources() {
       </main>
 
       <footer className="text-center py-8 text-gray-200 text-sm">
-        <p>&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} MizuGuna @2025.</p>
       </footer>
     </div>
   );
