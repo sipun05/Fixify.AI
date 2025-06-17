@@ -8,7 +8,7 @@ function formatDate(isoString) {
 
 function DashboardTable() {
   const [data, setData] = useState([]);
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("authToken");    
 
   // State to manage visibility of each parameter
   const [visibleParameters, setVisibleParameters] = useState({
@@ -28,7 +28,7 @@ function DashboardTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {d
+      try {
         const res = await fetch("https://api.mizuguna.in/api/dashboard", {
           method: "get",
           headers: new Headers({
