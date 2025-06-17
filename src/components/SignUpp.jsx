@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 const SignUpPage = ({ setIsAuthenticated }) => {
-    // State variables for form inputs and validation errors
+  
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -10,7 +10,7 @@ const SignUpPage = ({ setIsAuthenticated }) => {
     const [passwordError, setPasswordError] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
-    // State for the custom message modal (consistent with LoginPage)
+ 
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
@@ -98,7 +98,7 @@ const SignUpPage = ({ setIsAuthenticated }) => {
                         navigate('/dashboard'); // Redirect to dashboard
                     }, 1500); // Give user time to see success message
                 } else {
-                    // Registration failed (e.g., username already exists, server error)
+                  
                     const message = data.message || 'Registration failed. Please try a different username or try again.';
                     setModalMessage(message);
                     setIsSuccess(false);
@@ -195,8 +195,7 @@ const SignUpPage = ({ setIsAuthenticated }) => {
 
                 <div className="mt-6 text-sm text-gray-600">
                     Already have an account?{' '}
-                    {/* Link back to the login page */}
-                    <Link to="/" className="text-blue-600 hover:underline font-medium">
+                    <Link to="/userlogin" className="text-blue-600 hover:underline font-medium">
                         Sign In
                     </Link>
                 </div>
@@ -206,7 +205,7 @@ const SignUpPage = ({ setIsAuthenticated }) => {
                 </p>
             </div>
 
-            {/* Custom Message Modal (consistent with LoginPage) */}
+          
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full text-center transform transition-transform duration-300 scale-100 animate-fade-in-up">
@@ -216,12 +215,15 @@ const SignUpPage = ({ setIsAuthenticated }) => {
                         <p className={`text-lg font-semibold mb-4 ${isSuccess ? 'text-green-700' : 'text-red-700'}`}>
                             {modalMessage}
                         </p>
-                        <button
-                            onClick={() => setShowModal(false)}
-                            className="bg-blue-600 text-white py-2 px-5 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
-                        >
-                            Close
-                        </button>
+                       <button
+  onClick={() => {
+    setShowModal(false);
+    navigate('/userlogin');
+  }}
+  className="bg-blue-600 text-white py-2 px-5 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+>
+  Close
+</button>
                     </div>
                 </div>
             )}
