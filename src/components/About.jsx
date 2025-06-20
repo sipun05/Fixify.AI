@@ -3,10 +3,10 @@ import Building1 from '../assests/FieldWork/Building_Image1.jpg'
 
 const About = () => {
   return (
-    // The entire page background is now the image
+  
     <div
       className="min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${Building1})` }} // Use the imported image directly here
+      style={{ backgroundImage: `url(${Building1})` }} 
     >
       {/* A semi-transparent overlay to make text more readable on the background image */}
       <div className="min-h-screen bg-black bg-opacity-40 flex flex-col items-center justify-center py-8">
@@ -15,7 +15,6 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800">About Us</h1>
         </div>
 
-        {/* Main content area for the description, also floating as a card on the gradient background */}
         <main className="container mx-auto mt-8 p-6 bg-white bg-opacity-75 rounded-lg shadow-xl mb-8 max-w-4xl">
           <div className="prose lg:prose-lg mx-auto text-gray-800"> {/* Ensure text is visible on white background */}
             <p className="mb-4">

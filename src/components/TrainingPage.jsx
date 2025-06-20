@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// Assuming these images are correctly path-ed in your project
+
 import deviceOverviewImage from '../assests/FieldWork/Device1.jpg';
 import fishermanLaunchingImage from '../assests/FieldWork/FILED6.jpg';
 import fishermanMappingImage from '../assests/FieldWork/FILED7.jpg';

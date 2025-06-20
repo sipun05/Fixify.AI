@@ -1,0 +1,31 @@
+.dashboard-container {
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.table-container {
+    overflow-x: auto;
+    max-height: 300px;
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

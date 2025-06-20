@@ -6,7 +6,7 @@ import field4 from "../assests/FieldWork/FIELD4.jpg";
 import field5 from "../assests/FieldWork/FILED5.jpg";
 import field6 from "../assests/FieldWork/FILED6.jpg";
 import field7 from "../assests/FieldWork/FILED7.jpg";
-import Building2 from "../assests/FieldWork/Building_Image2.jpg"; // Background image for the carousels
+import Building2 from "../assests/FieldWork/Building_Image2.jpg"; 
 // Device images
 import device1 from "../assests/FieldWork/Device1.jpg";
 import device2 from "../assests/FieldWork/Device2.jpg";
@@ -44,7 +44,7 @@ const ImageCarousel = ({ images, currentIndex, setCurrentIndex, title, openLight
             <div
               key={img.id}
               className="w-full flex-shrink-0 cursor-pointer"
-              onClick={() => openLightbox(img, index, images)} // Pass the specific image array
+              onClick={() => openLightbox(img, index, images)} 
             >
               <img
                 src={img.src}
@@ -154,7 +154,7 @@ export default function Gallery() {
       prevIndex === deviceImages.length - 1 ? 0 : prevIndex + 1
     );
   };
-
+   
   const startDeviceAutoSlide = () => {
     clearInterval(deviceSlideIntervalRef.current);
     deviceSlideIntervalRef.current = setInterval(goToNextDeviceSlide, 3000);

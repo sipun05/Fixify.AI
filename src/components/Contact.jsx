@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    // Background gradient from the image
+   
     <div className="min-h-screen bg-gradient-to-br from-indigo-800 via-purple-700 to-blue-500 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-center text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl mb-12">
@@ -50,7 +50,7 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center">
-                {/* Changed icon color */}
+               
                 <svg
                   className="h-8 w-8 text-indigo-700 mr-4"
                   fill="none"
@@ -69,7 +69,7 @@ const Contact = () => {
                   <a href="mailto:info@iith.ac.in" className="text-indigo-600 hover:underline">
                     info@iith.ac.in
                   </a>
-                  {/* You might want to use a project-specific email if available */}
+                 
                 </div>
               </div>
 
@@ -156,7 +156,6 @@ const Contact = () => {
               <div>
                 <button
                   type="submit"
-                  // Button color from the "Get Started" button in the image
                   className="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 transition duration-300 ease-in-out"
                 >
                   Send Message
