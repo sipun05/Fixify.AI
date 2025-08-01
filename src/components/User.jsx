@@ -36,7 +36,10 @@ const FixifyUserDashboard = () => {
       dateReported: '2024-07-28',
       technician: 'Raj Kumar',
       estimatedTime: '2 hours',
-      images: ['📷', '📷']
+      images: [
+        { type: 'placeholder', data: '📷 Street Light 1' },
+        { type: 'placeholder', data: '📷 Street Light 2' }
+      ]
     },
     {
       id: 2,
@@ -49,7 +52,9 @@ const FixifyUserDashboard = () => {
       dateReported: '2024-07-27',
       technician: null,
       estimatedTime: null,
-      images: ['📷']
+      images: [
+        { type: 'placeholder', data: '📷 Water Leak' }
+      ]
     },
     {
       id: 3,
@@ -62,7 +67,11 @@ const FixifyUserDashboard = () => {
       dateReported: '2024-07-25',
       technician: 'Suresh Yadav',
       estimatedTime: 'Completed',
-      images: ['📷', '📷', '📷']
+      images: [
+        { type: 'placeholder', data: '📷 Garden 1' },
+        { type: 'placeholder', data: '📷 Garden 2' },
+        { type: 'placeholder', data: '📷 Garden 3' }
+      ]
     }
   ]);
 
@@ -109,24 +118,62 @@ const FixifyUserDashboard = () => {
   };
 
   const handleCameraCapture = () => {
-    // Simulate camera capture
-    const newImage = `📷 Camera_${Date.now()}`;
-    setIssueForm(prev => ({
-      ...prev,
-      images: [...prev.images, newImage]
-    }));
-    // Auto-detect location when taking photo from camera
-    getCurrentLocation();
+    // Create a file input for camera
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment'; // Use rear camera
+    
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const imageData = {
+            type: 'image',
+            data: e.target.result,
+            name: file.name || `Camera_${Date.now()}.jpg`
+          };
+          setIssueForm(prev => ({
+            ...prev,
+            images: [...prev.images, imageData]
+          }));
+        };
+        reader.readAsDataURL(file);
+        
+        // Auto-detect location when taking photo from camera
+        getCurrentLocation();
+      }
+    };
+    
+    input.click();
   };
 
   const handleGalleryUpload = (e) => {
     const files = Array.from(e.target.files);
-    const newImages = files.map(file => `📷 ${file.name}`);
+    
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageData = {
+          type: 'image',
+          data: e.target.result,
+          name: file.name
+        };
+        setIssueForm(prev => ({
+          ...prev,
+          images: [...prev.images, imageData]
+        }));
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const removeImage = (indexToRemove) => {
     setIssueForm(prev => ({
       ...prev,
-      images: [...prev.images, ...newImages]
+      images: prev.images.filter((_, index) => index !== indexToRemove)
     }));
-    // Don't auto-detect location for gallery uploads
   };
 
   const handleCreateIssue = (e) => {
@@ -194,6 +241,48 @@ const FixifyUserDashboard = () => {
     if (activeTab === 'completed') return issue.status === 'completed';
     return true;
   });
+
+  const renderImage = (image, index, showRemove = false, size = 'small') => {
+    const sizeClasses = size === 'large' ? 'w-48 h-48' : 'w-16 h-16';
+    
+    if (image.type === 'image') {
+      return (
+        <div key={index} className="relative group">
+          <img
+            src={image.data}
+            alt={image.name}
+            className={`${sizeClasses} object-cover rounded-lg border border-gray-200`}
+          />
+          {showRemove && (
+            <button
+              type="button"
+              onClick={() => removeImage(index)}
+              className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full text-sm hover:bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+            >
+              ×
+            </button>
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div key={index} className="relative group">
+          <div className={`${sizeClasses} bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center`}>
+            <span className="text-4xl">📷</span>
+          </div>
+          {showRemove && (
+            <button
+              type="button"
+              onClick={() => removeImage(index)}
+              className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 text-white rounded-full text-sm hover:bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+            >
+              ×
+            </button>
+          )}
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -407,11 +496,11 @@ const FixifyUserDashboard = () => {
                           {issue.estimatedTime && <span>⏱️ {issue.estimatedTime}</span>}
                         </div>
                         
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 mb-2">
                           <span className="text-sm text-gray-500">Images:</span>
-                          {issue.images.map((img, idx) => (
-                            <span key={idx} className="text-lg">{img}</span>
-                          ))}
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {issue.images.map((img, idx) => renderImage(img, idx))}
                         </div>
                       </div>
                       
@@ -473,23 +562,9 @@ const FixifyUserDashboard = () => {
                 
                 {issueForm.images.length > 0 && (
                   <div className="mt-4 p-4 bg-gray-50 rounded-xl">
-                    <div className="text-sm font-medium text-gray-700 mb-2">Selected Images:</div>
-                    <div className="flex flex-wrap gap-2">
-                      {issueForm.images.map((img, idx) => (
-                        <div key={idx} className="flex items-center space-x-2 bg-white px-3 py-2 rounded-lg border">
-                          <span>{img}</span>
-                          <button
-                            type="button"
-                            onClick={() => setIssueForm(prev => ({ 
-                              ...prev, 
-                              images: prev.images.filter((_, i) => i !== idx)
-                            }))}
-                            className="text-red-500 hover:text-red-700"
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
+                    <div className="text-sm font-medium text-gray-700 mb-4 text-center">Selected Images:</div>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {issueForm.images.map((img, idx) => renderImage(img, idx, true, 'large'))}
                     </div>
                   </div>
                 )}

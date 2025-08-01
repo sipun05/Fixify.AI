@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Default route → landing page */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<FixifyUserDashboard/>} />
 
         {/* Auth/Login page */}
         <Route path="/auth" element={<Login />} />
