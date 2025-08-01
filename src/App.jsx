@@ -132,63 +132,17 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import Header from './components/Header';
-import Home from './components/Home';
-import UserLogin from './components/UserLogin';
-import Gallery from './components/Gallery';
-import Info from './components/Info';
-import TrainingPage from './components/TrainingPage';
-import DashboardTable from './components/DashboardTable';
-import Graph from './components/Graph';
-import SignUpp from './components/SignUpp';
-import Contact from './components/Contact';
-import About from './components/About';
-import Resources from './components/Resources';
+import Login from './components/Login';
+
+
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!Cookies.get("authToken"));
-
-  useEffect(() => {
-    const token = Cookies.get("authToken");
-    setIsAuthenticated(!!token);
-  }, []);
 
   return (
     <BrowserRouter>
-      <Header isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-
       <Routes>
-        <Route path="/" element={<Home />} />
-
-        {/* Auth Routes */}
-        <Route
-          path="/userlogin"
-          element={
-            isAuthenticated
-              ? <Navigate to="/dashboard" />
-              : <UserLogin setIsAuthenticated={setIsAuthenticated} />
-          }
-        />
-        <Route path="/signupp" element={<SignUpp />} />
-
-        {/* Protected Route */}
-        <Route
-          path="/dashboard"
-          element={
-            isAuthenticated
-              ? <DashboardTable />
-              : <Navigate to="/userlogin" />
-          }
-        />
-
-        {/* Public Routes */}
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/info" element={<Info />} />
-        <Route path="/training" element={<TrainingPage />} />
-        <Route path="/graph" element={<Graph />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/resources" element={<Resources />} />
+       
+         <Route path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
