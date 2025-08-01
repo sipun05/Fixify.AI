@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import User from './User';
+import Technician from './Technician';
+import Admin from './Admin';
 
 const FixifyLandingPage = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -16,19 +19,18 @@ const FixifyLandingPage = () => {
     category: 'electrical'
   });
 
-  // Navigation function - in a real app this would use react-router
+  // Navigation function - sets currentPage to respective dashboard
   const navigate = (path) => {
-    // Simulate navigation - replace with actual router navigation
     switch (path) {
       case '/technician-dashboard':
-        alert('✅ Login successful! Redirecting to Technician Dashboard...');
+        setCurrentPage('technician');
         break;
       case '/admin-dashboard':
-        alert('✅ Login successful! Redirecting to Admin Dashboard...');
+        setCurrentPage('admin');
         break;
       case '/user-dashboard':
       default:
-        alert('✅ Login successful! Redirecting to User Dashboard...');
+        setCurrentPage('user');
         break;
     }
   };
@@ -89,27 +91,32 @@ const FixifyLandingPage = () => {
   };
 
   const handleAuthSubmit = () => {
-  setIsLoading(true);
-  
-  // Simulate API call
-  setTimeout(() => {
-    setIsLoading(false);
-    
-    // Navigate based on role
-    switch (currentRole) {
-      case 'technician':
-        navigate('/technician-dashboard');
-        break;
-      case 'admin':
-        navigate('/admin-dashboard');
-        break;
-      case 'user':
-      default:
-        navigate('/user-dashboard'); // Ensure this points to the correct route
-        break;
-    }
-  }, 1500);
-};
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+
+      if (authMode === 'signup') {
+        // After signup, go to login page
+        setAuthMode('login');
+      } else {
+        // After login, go to dashboard
+        switch (currentRole) {
+          case 'technician':
+            navigate('/technician-dashboard');
+            break;
+          case 'admin':
+            navigate('/admin-dashboard');
+            break;
+          case 'user':
+          default:
+            navigate('/user-dashboard');
+            break;
+        }
+      }
+    }, 1500);
+  };
 
   const features = [
     {
@@ -286,7 +293,7 @@ const FixifyLandingPage = () => {
                     </div>
                   </>
                 )}
-                
+
                 <div className={authMode === 'signup' ? 'md:col-span-2' : 'md:col-span-2'}>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                   <div className="relative">
@@ -301,7 +308,7 @@ const FixifyLandingPage = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className={authMode === 'signup' ? 'md:col-span-2' : 'md:col-span-2'}>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
                   <div className="relative">
@@ -379,6 +386,17 @@ const FixifyLandingPage = () => {
         </div>
       </div>
     );
+  }
+
+  // Render dashboard pages after login
+  if (currentPage === 'user') {
+    return <User />;
+  }
+  if (currentPage === 'technician') {
+    return <Technician />;
+  }
+  if (currentPage === 'admin') {
+    return <Admin />;
   }
 
   return (
