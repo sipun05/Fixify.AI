@@ -6,6 +6,7 @@ const FixifyLandingPage = () => {
   const [authMode, setAuthMode] = useState('signup');
   const [showPassword, setShowPassword] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [animatedStats, setAnimatedStats] = useState({ issues: 0, techs: 0, satisfaction: 0 });
   const [formData, setFormData] = useState({
     name: '',
@@ -14,6 +15,23 @@ const FixifyLandingPage = () => {
     password: '',
     category: 'electrical'
   });
+
+  // Navigation function - in a real app this would use react-router
+  const navigate = (path) => {
+    // Simulate navigation - replace with actual router navigation
+    switch (path) {
+      case '/technician-dashboard':
+        alert('✅ Login successful! Redirecting to Technician Dashboard...');
+        break;
+      case '/admin-dashboard':
+        alert('✅ Login successful! Redirecting to Admin Dashboard...');
+        break;
+      case '/user-dashboard':
+      default:
+        alert('✅ Login successful! Redirecting to User Dashboard...');
+        break;
+    }
+  };
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -58,9 +76,9 @@ const FixifyLandingPage = () => {
     }
   }, [currentPage]);
 
-  const handleRoleSelect = (role) => {
-    setCurrentRole(role);
-  };
+ const handleRoleSelect = (role) => {
+  setCurrentRole(role);
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,14 +88,28 @@ const FixifyLandingPage = () => {
     }));
   };
 
-  const handleAuthSubmit = (e) => {
-    e.preventDefault();
+  const handleAuthSubmit = () => {
+  setIsLoading(true);
+  
+  // Simulate API call
+  setTimeout(() => {
+    setIsLoading(false);
     
-    // Simulate API call
-    setTimeout(() => {
-      alert(`✅ ${authMode === 'login' ? 'Logged in' : 'Signed up'} successfully as ${currentRole}!`);
-    }, 1000);
-  };
+    // Navigate based on role
+    switch (currentRole) {
+      case 'technician':
+        navigate('/technician-dashboard');
+        break;
+      case 'admin':
+        navigate('/admin-dashboard');
+        break;
+      case 'user':
+      default:
+        navigate('/user-dashboard'); // Ensure this points to the correct route
+        break;
+    }
+  }, 1500);
+};
 
   const features = [
     {
@@ -283,7 +315,6 @@ const FixifyLandingPage = () => {
                       placeholder="Enter your password"
                     />
                     <button
-                      type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
@@ -315,9 +346,21 @@ const FixifyLandingPage = () => {
 
               <button
                 onClick={handleAuthSubmit}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg"
+                disabled={isLoading}
+                className={`w-full py-4 px-6 rounded-xl font-semibold transform transition-all duration-200 shadow-lg ${
+                  isLoading
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:scale-[1.02]'
+                }`}
               >
-                {authMode === 'login' ? `Login as ${currentRole}` : `Sign Up as ${currentRole}`} →
+                {isLoading ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  `${authMode === 'login' ? 'Login' : 'Sign Up'} as ${currentRole} →`
+                )}
               </button>
             </div>
 
