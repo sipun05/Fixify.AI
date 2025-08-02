@@ -13,7 +13,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Default route → landing page */}
+<<<<<<< HEAD
         <Route path="/" element={<Login/>} />
+=======
+        <Route path="/" element={<Login />} />
+>>>>>>> 6c75965befea2d445c6a85055036e66b12989fa5
 
         {/* Auth/Login page */}
         <Route path="/auth" element={<Login />} />
