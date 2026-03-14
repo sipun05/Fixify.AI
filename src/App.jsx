@@ -7,26 +7,22 @@ import TechnicianDashboard from './components/Technician';
 import FixifyAdminDashboard from './components/Admin';
 import FixifyUserDashboard from './components/User';
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Default route → landing page */}
-< HEAD/>
-        <Route path="/" element={<Login/>} />
-=======
-        <Route path="/" element={<Login />} /> 
+        <Route path="/" element={<Login />} />
+
         {/* Auth/Login page */}
         <Route path="/auth" element={<Login />} />
 
         {/* Role-based dashboards */}
         <Route path="/user-dashboard" element={<FixifyUserDashboard />} />
-        <Route path="/technician-dashboard" element={<TechnicianDashboard/>} />
-        <Route path="/user-dashboard" element={<FixifyAdminDashboard/>} />
-        <Route path="/admin-dashboard" element={<FixifyUserDashboard />} />
+        <Route path="/technician-dashboard" element={<TechnicianDashboard />} />
+        <Route path="/admin-dashboard" element={<FixifyAdminDashboard />} />
 
-        {/* Optional: Catch-all route to redirect to home */}
+        {/* Catch-all route to redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
