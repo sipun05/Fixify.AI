@@ -129,7 +129,7 @@ const FixifyAdminDashboard = () => {
       activeJobs: 3,
       earnings: 28500,
       status: 'Active'
-    },
+    },  
     {
       id: 2,
       name: 'Sarah Davis',

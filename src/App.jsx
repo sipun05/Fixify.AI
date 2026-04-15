@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Components
 import Login from './components/Login';
+import LoginT from './components/LoginT'
 import TechnicianDashboard from './components/Technician';
 import FixifyAdminDashboard from './components/Admin';
 import FixifyUserDashboard from './components/User';
@@ -12,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Default route → landing page */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginT />} />
 
         {/* Auth/Login page */}
         <Route path="/auth" element={<Login />} />

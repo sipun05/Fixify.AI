@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const FixifyUserDashboard = () => {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [activeTab, setActiveTab] = useState('active');
@@ -13,15 +13,17 @@ const FixifyUserDashboard = () => {
   const [isGettingLocation, setIsGettingLocation] = useState(false);
   
   // Mock user data
-  const [user] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '+91 9876543210',
+const [user] = useState(() => {
+  const stored = localStorage.getItem('user');
+  return stored ? JSON.parse(stored) : {
+    name: 'User',
+    email: '',
+    phone: '',
     avatar: '👤',
-    joinDate: '2024-01-15',
-    issuesReported: 12,
-    issuesResolved: 8
-  });
+    issuesReported: 0,
+    issuesResolved: 0
+  };
+});
 
   // Mock issues data
   const [issues, setIssues] = useState([
@@ -340,7 +342,11 @@ const FixifyUserDashboard = () => {
               </div>
               
               <button
-                onClick={() => setCurrentPage('auth')}
+               onClick={() => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  window.location.href = '/';
+}}
                 className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Logout
