@@ -1,17 +1,57 @@
 const express = require('express');
 const router = express.Router();
 const Issue = require('../models/Issue');
-
+const { analyzeIssue } = require('../services/geminiService');
 
 // Create Issue
 router.post('/', async (req, res) => {
   try {
 
-    const issue = await Issue.create(req.body);
+    const {
+      title,
+      description,
+      imageUrl,
+      location
+    } = req.body;
+
+    let category = 'UNKNOWN';
+    let severity = 'LOW';
+
+    const aiResponse = await analyzeIssue(description);
+
+    if (aiResponse) {
+
+      try {
+
+        const cleaned = aiResponse
+          .replace(/```json/g, '')
+          .replace(/```/g, '')
+          .trim();
+
+        const parsed = JSON.parse(cleaned);
+
+        category = parsed.category || 'UNKNOWN';
+        severity = parsed.severity || 'LOW';
+
+      } catch (err) {
+        console.log('Gemini parsing failed');
+      }
+    }
+
+    const issue = await Issue.create({
+      title,
+      description,
+      imageUrl,
+      location,
+      category,
+      severity
+    });
+    console.log(
+  `🚨 New Issue Created: ${issue.title} | Category: ${issue.category} | Severity: ${issue.severity}`
+);
 
     res.status(201).json({
       success: true,
-      message: 'Issue created successfully',
       issue
     });
 
@@ -24,7 +64,6 @@ router.post('/', async (req, res) => {
 
   }
 });
-
 
 // Get All Issues
 router.get('/', async (req, res) => {
@@ -283,6 +322,19 @@ router.patch('/:id/assign', async (req, res) => {
     });
 
   }
+});
+
+router.get('/technicians', async (req, res) => {
+
+  const technicians = await User.find({
+    role: 'technician'
+  });
+
+  res.json({
+    success: true,
+    technicians
+  });
+
 });
 
 
