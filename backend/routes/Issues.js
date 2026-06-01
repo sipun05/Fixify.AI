@@ -48,6 +48,139 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/status/open', async (req, res) => {
+  try {
+
+    const issues = await Issue.find({
+      status: 'OPEN'
+    });
+
+    res.json({
+      success: true,
+      count: issues.length,
+      issues
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
+router.get('/status/assigned', async (req, res) => {
+  try {
+
+    const issues = await Issue.find({
+      status: 'ASSIGNED'
+    });
+
+    res.json({
+      success: true,
+      count: issues.length,
+      issues
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
+router.get('/status/in-progress', async (req, res) => {
+  try {
+
+    const issues = await Issue.find({
+      status: 'IN_PROGRESS'
+    });
+
+    res.json({
+      success: true,
+      count: issues.length,
+      issues
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
+router.get('/status/resolved', async (req, res) => {
+  try {
+
+    const issues = await Issue.find({
+      status: 'RESOLVED'
+    });
+
+    res.json({
+      success: true,
+      count: issues.length,
+      issues
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
+
+router.get('/analytics/summary', async (req, res) => {
+  try {
+
+    const total = await Issue.countDocuments();
+
+    const open = await Issue.countDocuments({
+      status: 'OPEN'
+    });
+
+    const assigned = await Issue.countDocuments({
+      status: 'ASSIGNED'
+    });
+
+    const inProgress = await Issue.countDocuments({
+      status: 'IN_PROGRESS'
+    });
+
+    const resolved = await Issue.countDocuments({
+      status: 'RESOLVED'
+    });
+
+    res.json({
+      success: true,
+      total,
+      open,
+      assigned,
+      inProgress,
+      resolved
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+});
+
 
 // Get Single Issue
 router.get('/:id', async (req, res) => {
