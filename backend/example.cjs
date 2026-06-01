@@ -31,7 +31,8 @@ function formatWhatsAppNumber(phoneNumber) {
 
   return cleanNumber;
 }
-
+console.log("TWILIO_ACCOUNT_SID =", process.env.TWILIO_ACCOUNT_SID);
+console.log("TWILIO_AUTH_TOKEN =", process.env.TWILIO_AUTH_TOKEN ? "Loaded" : "Missing");
 // Initialize Twilio client
 const twilio = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 

@@ -12,7 +12,7 @@ connectDb();
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
-
+app.use('/api/issues', require('./routes/issues'));
 app.get('/', (req, res) => {
   res.json({ message: '✅ Fixify.AI backend is running!' });
 });
